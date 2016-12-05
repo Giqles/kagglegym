@@ -8,13 +8,15 @@ RUN useradd -m -s /bin/bash -N -u 1000 kaggler && \
 
 USER kaggler
 
-# Include the gym code in gym
-ADD ./gym/kagglegym.py /wd/gym/kagglegym.py
-ADD ./gym/__init__.py /wd/gym/__init__.py
+# Include the gym code in home/gym
+ADD ./gym/kagglegym.py /home/kaggler/gym/kagglegym.py
+ADD /gym/__init__.py /home/kaggler/gym/__init__.py
 
 # Include the training data in input
-ADD  ./gym/input/train.h5 /wd/gym/input/train.h5
+ADD  ./gym/input/train.h5 /home/kaggler/gym/input/train.h5
 
+# Add the location of kagglegym to the pythonpath
+ENV PYTHONPATH="${PYTHONPATH}:/home/kaggler/gym"
 
 WORKDIR /wd
 

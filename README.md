@@ -54,11 +54,7 @@ from will be linked to the container itself.
 
 ### kagglegym usage
 
-`kagglegym` should function in the same way as described in the api-overview [here](https://www.kaggle.com/jeffmoser/two-sigma-financial-modeling/kagglegym-api-overview),
-with the exception that the import command is:
-```
-from gym import kagglegym
-```
+`kagglegym` should function in the same way as described in the api-overview [here](https://www.kaggle.com/jeffmoser/two-sigma-financial-modeling/kagglegym-api-overview).
 
-Aside from switching that back to `import kagglegym`, you should be able copy
-and paste your local code to kaggle scripts/notebooks and have it function the same way.
+You *should* be able copy and paste your local code to kaggle scripts/notebooks
+and have it function the same way.
