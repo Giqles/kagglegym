@@ -1,12 +1,15 @@
 # Build from kaggle python image
 FROM kaggle/python
 
-# Make kaggler user
+# Make kaggler user, wd, data for joblib
 RUN useradd -m -s /bin/bash -N -u 1000 kaggler && \
-  mkdir -p /wd && \
-  chown kaggler /wd
+  mkdir -p /wd && mkdir -p /data && \
+  chown kaggler /wd && chown kaggler /data
 
 USER kaggler
+
+# Set up joblib temp
+ENV JOBLIB_TEMP_FOLDER=/data/joblib
 
 # Include the gym code in home/gym
 ADD ./gym/kagglegym.py /home/kaggler/gym/kagglegym.py
