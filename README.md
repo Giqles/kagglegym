@@ -36,25 +36,30 @@ python
 
 Assuming you want to save results for local viewing, or run local code inside
 the image, it's usually easiest to link a directory between the local machine
-and the container. This command will launch the container with the current
-working directory linked to the container working directory:
+and the container. I've also found that joblib can issue an OS error if you don't
+mount a drive and set it to use that drive for temp data with an environment variable.
+This command will launch the container with the current working directory linked
+to the container working directory:
 
 ```
-docker run -it -v $(pwd):/wd kagglegym
+docker run -it -v $(pwd):/wd -v /data -e JOBLIB_TEMP_FOLDER=/data/joblib kagglegym
 ```
 
 And finally if you want to use this with Jupyter notebook, you'll want to link a port
 and pass the command to start the notebook on launching the container.
 ```
-docker run -it -v $(pwd):/wd -p 8888:8888 kagglegym jupyter notebook --port=8888 --ip=0.0.0.0
+docker run -it -v $(pwd):/wd -v /data -e JOBLIB_TEMP_FOLDER=/data/joblib -p 8888:8888 kagglegym jupyter notebook --port=8888 --ip=0.0.0.0
 ```
 If you then head to `localhost:8888`, in your web browser you should be able to
 use notebooks as normal. Again, the working directory you launched the container
 from will be linked to the container itself.
+
+Obviously those commands are pretty long, I suggest you make aliases for them.
 
 ### kagglegym usage
 
 `kagglegym` should function in the same way as described in the api-overview [here](https://www.kaggle.com/jeffmoser/two-sigma-financial-modeling/kagglegym-api-overview).
 
 You *should* be able copy and paste your local code to kaggle scripts/notebooks
-and have it function the same way.
+and have it function the same way. Obviously, the available resources on kaggle
+kernels may differ.
