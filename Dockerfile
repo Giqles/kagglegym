@@ -1,10 +1,11 @@
 # Build from kaggle python image
 FROM kaggle/python
 
-# Make kaggler user, wd, data for joblib
+# Make kaggler user, wd, data for joblib, input folder
 RUN useradd -m -s /bin/bash -N -u 1000 kaggler && \
-  mkdir -p /wd && mkdir -p /data && \
-  chown kaggler /wd && chown kaggler /data
+  mkdir -p /wd && chown kaggler /wd && \
+  mkdir -p /data && chown kaggler /data && \
+  mkdir -p /input && chown kaggler /input
 
 USER kaggler
 
@@ -16,7 +17,7 @@ ADD ./gym/kagglegym.py /home/kaggler/gym/kagglegym.py
 ADD /gym/__init__.py /home/kaggler/gym/__init__.py
 
 # Include the training data in input
-ADD  ./gym/input/train.h5 /home/kaggler/gym/input/train.h5
+ADD  ./gym/input/train.h5 /input/train.h5
 
 # Add the location of kagglegym to the pythonpath
 ENV PYTHONPATH="${PYTHONPATH}:/home/kaggler/gym"

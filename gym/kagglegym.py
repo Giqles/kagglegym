@@ -3,10 +3,6 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import r2_score
 
-# get the location of the HDFStore
-this_dir, this_filename = os.path.split(__file__)
-DATA_PATH = os.path.join(this_dir, "input", "train.h5")
-
 # This is taken from Frans Slothoubers post on the contest discussion forum.
 # https://www.kaggle.com/slothouber/two-sigma-financial-modeling/kagglegym-emulation
 
@@ -30,7 +26,7 @@ class Observation(object):
 
 class Environment(object):
     def __init__(self):
-        with pd.HDFStore(DATA_PATH, "r") as hfdata:
+        with pd.HDFStore("/input/train.h5", "r") as hfdata:
             self.timestamp = 0
             fullset = hfdata.get("train")
             self.unique_timestamp = fullset["timestamp"].unique()
