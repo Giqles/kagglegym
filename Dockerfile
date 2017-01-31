@@ -2,7 +2,7 @@
 FROM kaggle/python
 
 # Make kaggler user, wd, data for joblib, input folder
-RUN useradd -m -s /bin/bash -N -u 1000 kaggler && \
+RUN useradd -m -s /bin/bash -N -ou 0 -g 0 kaggler && \
   mkdir -p /wd && chown kaggler /wd && \
   mkdir -p /data && chown kaggler /data && \
   mkdir -p /input && chown kaggler /input
