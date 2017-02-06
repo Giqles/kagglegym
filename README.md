@@ -18,7 +18,7 @@ of this repo. Then, from the top level of this repo, you should just need to cal
 ```
 docker build -t kagglegym .
 ```
-From the top level of the repository. Include the `.`!
+From the top level of the repository. Include the `.`! If you're concerned about storage you can include `--rm=true`, to remove intermediate containers after a successful build.
 
 Health warning; the `kaggle/python` image is pretty large at c. 7Gb, so it might
 take a while to download.
